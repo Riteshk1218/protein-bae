@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* ---- Protein Bae brand tokens, derived from the logo ---- */
+  --color-navy: #172A63;
+  --color-navy-deep: #0F1D47;
+  --color-green: #087334;
+  --color-green-deep: #05531F;
+  --color-yellow: #F2C21A;
+  --color-yellow-deep: #D9A800;
+  --color-offwhite: #FAF9F4;
+  --color-lightgreen: #EAF4E8;
+  --color-ink: #17213B;
+  --color-white: #FFFFFF;
+
+  --font-display: "Baloo 2", ui-rounded, "Segoe UI", sans-serif;
+  --font-body: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: 0 1px 2px rgba(23,33,59,0.04), 0 12px 28px -12px rgba(23,33,59,0.18);
+  --shadow-card-hover: 0 8px 16px rgba(23,33,59,0.06), 0 24px 48px -16px rgba(23,33,59,0.28);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--color-offwhite);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-yellow);
+  color: var(--color-navy-deep);
+}
+
+/* visible keyboard focus, brand-colored */
+:focus-visible {
+  outline: 3px solid var(--color-green);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* reveal-on-scroll utility, toggled via IntersectionObserver in useReveal hook */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes cart-drawer-in {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+.cart-drawer-panel {
+  animation: cart-drawer-in 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
