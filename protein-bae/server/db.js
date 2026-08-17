@@ -3,8 +3,13 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import fs from 'node:fs'
 
+//const __dirname = path.dirname(fileURLToPath(import.meta.url))
+//const dbPath = path.join(__dirname, 'proteinbae.db')//
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const dbPath = path.join(__dirname, 'proteinbae.db')
+const dbPath = process.env.DB_PATH || path.join(__dirname, 'proteinbae.db')
+
+
 
 export const db = new Database(dbPath)
 db.pragma('journal_mode = WAL')
