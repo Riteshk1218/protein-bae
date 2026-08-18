@@ -1,12 +1,6 @@
 import 'dotenv/config'
 import express from 'express'
-import path from 'path'
-import { fileURLToPath } from 'url'
- 
-const app = express()
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 
 import cors from 'cors'
 import { ordersRouter } from './routes/orders.js'
@@ -47,17 +41,6 @@ app.use('/api/dashboard', dashboardRouter)
 app.use('/api/reports', reportsRouter)
 app.use('/api/partnerships', partnershipsRouter)
 app.use('/api/contact', contactRouter)
-
-// Serve React frontend
-const frontendPath = path.join(__dirname, '../dist')
-
-app.use(express.static(frontendPath))
-
-// React Router fallback
-app.get(/^\/(?!api).*/, (req, res) => {
-  res.sendFile(path.join(frontendPath, 'index.html'))
-})
-
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
